@@ -2,10 +2,10 @@
 
 const Validator = require('./core')
 
-module.exports = (ctx, app) => {
+module.exports = (app) => {
   app.validator = new Validator()
 
-  ctx.validate = function (rules, data) {
+  app.context.validate = function (rules, data) {
     const { method, query, body } = this.request;
     let validateParams;
     switch (method) {
@@ -24,7 +24,7 @@ module.exports = (ctx, app) => {
     data = data || validateParams;
     const errors = app.validator.validate(rules, data);
     if (errors) {
-      ctx.throw(422, 'Validation Failed', {
+      app.context.throw(422, 'Validation Failed', {
         code: 'invalid_param',
         errors,
       });

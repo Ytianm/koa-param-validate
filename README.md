@@ -19,7 +19,7 @@ const koaParamValidate = require("koa-param-validate")
 
 const app = new Koa()
 
-koaParamValidate(app.context, app)
+koaParamValidate(app)
 
 app.listen(3000, () => {
   console.log("server is running...")
